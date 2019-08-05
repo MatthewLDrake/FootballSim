@@ -1,0 +1,11 @@
+c:\users\matthew\source\repos\Football\Football\bin\Debug\Football.exe.config
+c:\users\matthew\source\repos\Football\Football\bin\Debug\Football.exe
+c:\users\matthew\source\repos\Football\Football\bin\Debug\Football.pdb
+c:\users\matthew\source\repos\Football\Football\obj\Debug\Football.csprojResolveAssemblyReference.cache
+c:\users\matthew\source\repos\Football\Football\obj\Debug\Football.FootballGame.resources
+c:\users\matthew\source\repos\Football\Football\obj\Debug\Football.Form1.resources
+c:\users\matthew\source\repos\Football\Football\obj\Debug\Football.Properties.Resources.resources
+c:\users\matthew\source\repos\Football\Football\obj\Debug\Football.csproj.GenerateResource.Cache
+c:\users\matthew\source\repos\Football\Football\obj\Debug\Football.csproj.CoreCompileInputs.cache
+c:\users\matthew\source\repos\Football\Football\obj\Debug\Football.exe
+c:\users\matthew\source\repos\Football\Football\obj\Debug\Football.pdb
