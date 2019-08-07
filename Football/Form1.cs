@@ -443,6 +443,28 @@ namespace Football
 
         private void SeasonOver()
         {
+            List<Team> theTeams = new List<Team>();
+            nfcNorth.OrderTeams();
+            nfcSouth.OrderTeams();
+            nfcWest.OrderTeams();
+            nfcEast.OrderTeams();
+            afcNorth.OrderTeams();
+            afcSouth.OrderTeams();
+            afcWest.OrderTeams();
+            afcEast.OrderTeams();
+
+            theTeams.AddRange(nfcNorth.GetTeams());
+            theTeams.AddRange(nfcEast.GetTeams());
+            theTeams.AddRange(nfcSouth.GetTeams());
+            theTeams.AddRange(nfcWest.GetTeams());
+
+            theTeams.AddRange(afcNorth.GetTeams());
+            theTeams.AddRange(afcEast.GetTeams());
+            theTeams.AddRange(afcSouth.GetTeams());
+            theTeams.AddRange(afcWest.GetTeams());
+
+            teams = theTeams;
+
             foreach(Team team in teams)
             {
                 team.ResetSeason();

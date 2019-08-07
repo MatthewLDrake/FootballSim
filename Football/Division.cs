@@ -60,6 +60,10 @@ namespace Football
                 teams.Add(team);
 
         }
+        public List<Team> GetTeams()
+        {
+            return teams;
+        }
         public void PrintResults()
         {
             OrderTeams();
@@ -75,7 +79,10 @@ namespace Football
         {
             OrderByFranchiseTeams();
 
-            string 
+            string result =  teams[0].GetFranchiseResult() + "\n" + teams[1].GetFranchiseResult() + "\n" + teams[2].GetFranchiseResult()
+             + "\n" + teams[3].GetFranchiseResult() + "\n";
+
+            return result;
         }
         public Team GetDivisionWinner()
         {

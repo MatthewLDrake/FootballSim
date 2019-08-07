@@ -241,25 +241,25 @@ namespace Football
 
             for (int i = 4; i < 16; i += 4)
             {
-                games[6].AddGame(i, i + 20);
-                games[6].AddGame(i + 1, i + 21);
-                games[6].AddGame(i + 2, i + 22);
-                games[6].AddGame(i + 3, i + 23);
+                games[6].AddGame(i, i + 12);
+                games[6].AddGame(i + 1, i + 13);
+                games[6].AddGame(i + 2, i + 14);
+                games[6].AddGame(i + 3, i + 15);
 
-                games[7].AddGame(i, i + 21);
-                games[7].AddGame(i + 1, i + 22);
-                games[7].AddGame(i + 2, i + 23);
-                games[7].AddGame(i + 3, i + 20);
+                games[7].AddGame(i, i + 13);
+                games[7].AddGame(i + 1, i + 14);
+                games[7].AddGame(i + 2, i + 15);
+                games[7].AddGame(i + 3, i + 12);
 
-                games[8].AddGame(i + 22, i);
-                games[8].AddGame(i + 23, i + 1);
-                games[8].AddGame(i + 20, i + 2);
-                games[8].AddGame(i + 21, i + 3);
+                games[8].AddGame(i + 14, i);
+                games[8].AddGame(i + 15, i + 1);
+                games[8].AddGame(i + 12, i + 2);
+                games[8].AddGame(i + 13, i + 3);
 
-                games[9].AddGame(i + 23, i);
-                games[9].AddGame(i + 20, i + 1);
-                games[9].AddGame(i + 21, i + 2);
-                games[9].AddGame(i + 22, i + 3);
+                games[9].AddGame(i + 15, i);
+                games[9].AddGame(i + 12, i + 1);
+                games[9].AddGame(i + 13, i + 2);
+                games[9].AddGame(i + 14, i + 3);
             }
         }
         #endregion

@@ -9,3 +9,13 @@ c:\users\matthew\source\repos\Football\Football\obj\Debug\Football.csproj.Genera
 c:\users\matthew\source\repos\Football\Football\obj\Debug\Football.csproj.CoreCompileInputs.cache
 c:\users\matthew\source\repos\Football\Football\obj\Debug\Football.exe
 c:\users\matthew\source\repos\Football\Football\obj\Debug\Football.pdb
+C:\Users\Matt\Documents\FootballSim\Football\bin\Debug\Football.exe.config
+C:\Users\Matt\Documents\FootballSim\Football\obj\Debug\Football.exe
+C:\Users\Matt\Documents\FootballSim\Football\obj\Debug\Football.pdb
+C:\Users\Matt\Documents\FootballSim\Football\bin\Debug\Football.exe
+C:\Users\Matt\Documents\FootballSim\Football\bin\Debug\Football.pdb
+C:\Users\Matt\Documents\FootballSim\Football\obj\Debug\Football.csprojResolveAssemblyReference.cache
+C:\Users\Matt\Documents\FootballSim\Football\obj\Debug\Football.FootballGame.resources
+C:\Users\Matt\Documents\FootballSim\Football\obj\Debug\Football.Form1.resources
+C:\Users\Matt\Documents\FootballSim\Football\obj\Debug\Football.Properties.Resources.resources
+C:\Users\Matt\Documents\FootballSim\Football\obj\Debug\Football.csproj.GenerateResource.Cache
