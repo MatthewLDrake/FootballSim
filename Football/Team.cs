@@ -9,6 +9,7 @@ namespace Football
         private int pointsFor, pointsAgainst, teamNum, superBowlWins, superBowlLosses;
         private Record record, allTimeRecord, playoffRecord;
         private List<Record> seasonRecordVsTeam,allTimeRecordvsTeam;
+        private Coach headCoach, offCoor, defCoor, stCoor;
         public Team(string name)
         {
             teamName = name;
