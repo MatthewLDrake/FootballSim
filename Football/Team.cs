@@ -10,6 +10,7 @@ namespace Football
         private Record record, allTimeRecord, playoffRecord;
         private List<Record> seasonRecordVsTeam,allTimeRecordvsTeam;
         private Coach headCoach, offCoor, defCoor, stCoor;
+        private DepthChart depthChart;
         public Team(string name)
         {
             teamName = name;
@@ -25,7 +26,7 @@ namespace Football
                 seasonRecordVsTeam.Add(new Record());
                 allTimeRecordvsTeam.Add(new Record());
             }
-
+            depthChart = new DepthChart();
         }
         public int GetTeamNum()
         {

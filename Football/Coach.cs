@@ -23,5 +23,9 @@ namespace Football
         {
             return name;
         }
+        public Play GetNextPlay()
+        {
+            return null;
+        }
     }
 }
