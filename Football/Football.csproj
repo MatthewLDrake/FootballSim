@@ -47,6 +47,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Coach.cs" />
+    <Compile Include="DefensiveInterfaces.cs" />
+    <Compile Include="DefensivePlayer.cs" />
     <Compile Include="DepthChart.cs" />
     <Compile Include="Division.cs" />
     <Compile Include="FootballGame.cs">
@@ -63,6 +65,8 @@
     </Compile>
     <Compile Include="Game.cs" />
     <Compile Include="Kicker.cs" />
+    <Compile Include="OffensiveInterfaces.cs" />
+    <Compile Include="OffensivePlayer.cs" />
     <Compile Include="Play.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="PlayType.cs" />
@@ -70,10 +74,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Random.cs" />
     <Compile Include="Record.cs" />
-    <Compile Include="RouteRunner.cs" />
     <Compile Include="Schedule.cs" />
     <Compile Include="Team.cs" />
-    <Compile Include="Thrower.cs" />
     <EmbeddedResource Include="FootballGame.resx">
       <DependentUpon>FootballGame.cs</DependentUpon>
     </EmbeddedResource>

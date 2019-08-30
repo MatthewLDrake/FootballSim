@@ -8,12 +8,21 @@ namespace Football
     public partial class Player : IComparable<Player>
     {
         private int overallComparer;
+        private int speedRating, accelerationRating, strengthRating;
+        private string name;
         // This is the base player
-        public Player()
+        public Player(String name, int[] ratings)
         {
-            SetUpKicker();
-            SetUpThrower();
-            SetUpRouteRunner();
+            this.name = name;
+            speedRating = ratings[0];
+            accelerationRating = ratings[1];
+            strengthRating = ratings[2];
+
+            SetUpKicker(ratings.Skip(3).Take(3).ToArray());
+            SetUpThrower(ratings.Skip(6).Take(7).ToArray());
+            SetUpRouteRunner(ratings.Skip(13).Take(5).ToArray());
+            SetUpBallCarrier(ratings.Skip(18).Take(5).ToArray());
+            SetUpBlocker(ratings.Skip(23).Take(2).ToArray());
         }
         public void SetOverallComparer(int value)
         {
@@ -44,9 +53,11 @@ namespace Football
     public partial class Player : Kicker
     {
         private int legStrength, puntingAim, fieldGoalAim;
-        public void SetUpKicker()
+        public void SetUpKicker(int[] ratings)
         {
-            
+            legStrength = ratings[0];
+            puntingAim = ratings[1];
+            fieldGoalAim = ratings[2];
         }
 
         public double GetLegPower()

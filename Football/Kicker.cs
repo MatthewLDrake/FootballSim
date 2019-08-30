@@ -7,7 +7,7 @@ namespace Football
 {
     interface Kicker
     {
-        void SetUpKicker();
+        void SetUpKicker(int[] ratings);
         double GetLegPower();
         double GetPuntingAim();
         double GetFieldGoalAim();

@@ -8,7 +8,7 @@ namespace Football
 {
     public interface Thrower
     {
-        void SetUpThrower();
+        void SetUpThrower(int[] ratings);
         ThrowingStyle GetThrowingStyle();
         double GetArmStrength();
         double GetShortAccuracy();
@@ -20,11 +20,11 @@ namespace Football
     }
     public enum ThrowingStyle
     {
-        DUAL_THREAT, GUNSLINGER, POCKET_PASSER
+        DUAL_THREAT = 0, GUNSLINGER = 1, POCKET_PASSER = 2
     }
     public interface RouteRunner
     {
-        void SetUpRouteRunner();
+        void SetUpRouteRunner(int[] ratings);
         double GetOpenCatching();
         double GetContestedCatching();
         double GetSpectacularCatching();
@@ -34,14 +34,14 @@ namespace Football
     }
     public interface Blocker
     {
-        void SetUpBlocker();
+        void SetUpBlocker(int[] ratings);
         double GetRunBlocking();
         double GetPassBlocking();
         double GetBlockerOverall();
     }
     public interface BallCarrier
     {
-        void SetUpBallCarrier();
+        void SetUpBallCarrier(int[] ratings);
         double GetCarrying();
         double GetElusiveness();
         double GetBreakTackle();

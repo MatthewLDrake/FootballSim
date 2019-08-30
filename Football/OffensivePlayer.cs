@@ -11,9 +11,15 @@ namespace Football
         private int armStrength, shortArmAccuracy, middleArmAccuracy, deepArmAccuracy, vision, decisionMaking;
         private ThrowingStyle style;
 
-        public void SetUpThrower()
+        public void SetUpThrower(int[] ratings)
         {
-
+            armStrength = ratings[0];
+            shortArmAccuracy = ratings[1];
+            middleArmAccuracy = ratings[2];
+            deepArmAccuracy = ratings[3];
+            vision = ratings[4];
+            decisionMaking = ratings[5];
+            style = (ThrowingStyle)ratings[6];
         }
         public ThrowingStyle GetThrowingStyle()
         {
@@ -58,9 +64,13 @@ namespace Football
     public partial class Player : RouteRunner
     {
         private int openCatching, contestedCatching, spectacularCatching, cutting, release;
-        public void SetUpRouteRunner()
+        public void SetUpRouteRunner(int[] ratings)
         {
-
+            openCatching = ratings[0];
+            contestedCatching = ratings[1];
+            spectacularCatching = ratings[2];
+            cutting = ratings[3];
+            release = ratings[4];
         }
         public double GetOpenCatching()
         {
@@ -92,12 +102,49 @@ namespace Football
             throw new NotImplementedException();
         }
     }
+    public partial class Player : BallCarrier
+    {
+        private int carrying, elusiveness, breakTackle, ballCarrierVision, ballCarrierDecision;
+        public void SetUpBallCarrier(int[] ratings)
+        {
+            carrying = ratings[0];
+            elusiveness = ratings[1];
+            breakTackle = ratings[2];
+            ballCarrierVision = ratings[3];
+            ballCarrierDecision = ratings[4];
+        }
+        public double GetCarrying()
+        {
+            return carrying;
+        }
+        public double GetElusiveness()
+        {
+            return elusiveness;
+        }
+        public double GetBreakTackle()
+        {
+            return breakTackle;
+        }
+        public double GetBallCarrierVision()
+        {
+            return ballCarrierVision;
+        }
+        public double GetBallCarrierDecision()
+        {
+            return ballCarrierDecision;
+        }
+        public double GetBallCarrierOverall()
+        {
+            throw new NotImplementedException();
+        }
+    }
     public partial class Player : Blocker
     {
         private int runBlocking, passBlocking;
-        public void SetUpBlocker()
+        public void SetUpBlocker(int[] ratings)
         {
-            
+            runBlocking = ratings[0];
+            passBlocking = ratings[1];
         }
 
         public double GetRunBlocking()
