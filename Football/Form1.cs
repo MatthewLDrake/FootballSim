@@ -25,13 +25,8 @@ namespace Football
 
             schedule = new Schedule();
 
-            int[] arr = new int[100];
-            for(int i = 0; i < arr.Length; i++)
-            {
-                arr[i] = i;
-            }
-
-            Player testPlayer = new Player("Test Player", arr);
+            DraftClasses classes = new DraftClasses();
+            classes.GetNextClass();
 
             nfcNorth = new Division("NFC North");
             nfcEast = new Division("NFC East");

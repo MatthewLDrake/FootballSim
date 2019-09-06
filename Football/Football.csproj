@@ -47,10 +47,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Coach.cs" />
+    <Compile Include="CollegeList.cs" />
     <Compile Include="DefensiveInterfaces.cs" />
     <Compile Include="DefensivePlayer.cs" />
     <Compile Include="DepthChart.cs" />
     <Compile Include="Division.cs" />
+    <Compile Include="DraftClasses.cs" />
     <Compile Include="FootballGame.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -69,6 +71,7 @@
     <Compile Include="OffensivePlayer.cs" />
     <Compile Include="Play.cs" />
     <Compile Include="Player.cs" />
+    <Compile Include="PlayerFactory.cs" />
     <Compile Include="PlayType.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

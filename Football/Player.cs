@@ -8,16 +8,20 @@ namespace Football
     public partial class Player : IComparable<Player>
     {
         private int overallComparer;
-        private int speedRating, accelerationRating, strengthRating, jumpRating, height, weight;
+        private int speedRating, accelerationRating, strengthRating, jumpRating, height, weight, age;
         private string name;
+        private CollegeList college;
         // This is the base player
-        public Player(String name, int[] ratings, int height, int weight)
+        public Player(String name, int[] ratings, int height, int weight, int age, CollegeList college)
         {
             this.name = name;
             speedRating = ratings[0];
             accelerationRating = ratings[1];
             strengthRating = ratings[2];
             jumpRating = ratings[3];
+
+            this.age = age;
+            this.college = college;
 
 
             SetUpKicker(ratings.Skip(4).Take(3).ToArray());
@@ -28,6 +32,10 @@ namespace Football
             SetDefenderRatings(ratings.Skip(26).Take(4).ToArray());
             SetUpPassRusher(ratings.Skip(30).Take(2).ToArray());
             SetUpCoverage(ratings.Skip(32).Take(3).ToArray());
+        }
+        public CollegeList GetCollege()
+        {
+            return college;
         }
         public void SetOverallComparer(int value)
         {
