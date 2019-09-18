@@ -27,6 +27,7 @@ namespace Football
 
             DraftClasses classes = new DraftClasses();
             classes.GetNextClass();
+            classes.GetNextClass();
 
             nfcNorth = new Division("NFC North");
             nfcEast = new Division("NFC East");
