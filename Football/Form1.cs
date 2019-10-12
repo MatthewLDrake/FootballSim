@@ -28,6 +28,10 @@ namespace Football
             DraftClasses classes = new DraftClasses();
             classes.GetNextClass();
             classes.GetNextClass();
+            classes.GetNextClass();
+            classes.GetNextClass();
+
+            Console.WriteLine("Balanced: " + PlayerFactory.balanced + ", Scramblers: " + PlayerFactory.scrambler + ", Pocket: " + PlayerFactory.pocket);
 
             nfcNorth = new Division("NFC North");
             nfcEast = new Division("NFC East");
