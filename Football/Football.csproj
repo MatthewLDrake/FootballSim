@@ -78,6 +78,7 @@
     <Compile Include="Random.cs" />
     <Compile Include="Record.cs" />
     <Compile Include="Schedule.cs" />
+    <Compile Include="Stats.cs" />
     <Compile Include="Team.cs" />
     <EmbeddedResource Include="FootballGame.resx">
       <DependentUpon>FootballGame.cs</DependentUpon>

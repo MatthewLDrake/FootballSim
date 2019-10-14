@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Football
 {
-    interface BaseDefender
+    public interface BaseDefender
     {
         void SetDefenderRatings(int[] ratings);
         double GetTackling();
@@ -15,7 +15,7 @@ namespace Football
         double GetDefensiveReactions();
     }
 
-    interface PassRush
+    public interface PassRush
     {
         void SetUpPassRusher(int[] ratings);
         double GetBullRush();
@@ -23,7 +23,7 @@ namespace Football
 
     }
 
-    interface Coverage
+    public interface Coverage
     {
         void SetUpCoverage(int[] ratings);
         double GetPressCoverage();
