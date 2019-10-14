@@ -11,6 +11,10 @@ namespace Football
         private int speedRating, accelerationRating, strengthRating, jumpRating, height, weight, age;
         private string name;
         private CollegeList college;
+        private List<StatsHolder> gameStats;
+        private List<List<StatsHolder>> seasonStats;
+        private List<List<List<StatsHolder>>> careerStats;
+        private Team team;
         // This is the base player
         public Player(String name, int[] ratings, int height, int weight, int age, CollegeList college)
         {
@@ -19,6 +23,10 @@ namespace Football
             accelerationRating = ratings[1];
             strengthRating = ratings[2];
             jumpRating = ratings[3];
+
+            gameStats = new List<StatsHolder>();
+            seasonStats = new List<List<StatsHolder>>();
+            careerStats = new List<List<List<StatsHolder>>>();
 
             this.age = age;
             this.college = college;
@@ -32,6 +40,14 @@ namespace Football
             SetDefenderRatings(ratings.Skip(26).Take(4).ToArray());
             SetUpPassRusher(ratings.Skip(30).Take(2).ToArray());
             SetUpCoverage(ratings.Skip(32).Take(3).ToArray());
+        }
+        public void SetTeam(Team team)
+        {
+            this.team = team;
+        }
+        public Team GetTeam()
+        {
+            return team;
         }
         public CollegeList GetCollege()
         {
@@ -61,6 +77,20 @@ namespace Football
             if (num > 0) return 1;
             else if (num == 0) return 0;
             else return -1;
+        }
+        public void AddStat(Stats stat)
+        {
+            gameStats.Add(new StatsHolder(stat,team));
+        }
+        public void GameEnded()
+        {
+            seasonStats.Add(gameStats);
+            gameStats = new List<StatsHolder>();
+        }
+        public void SeasonEnded()
+        {
+            careerStats.Add(seasonStats);
+            seasonStats = new List<List<StatsHolder>>();
         }
     }
     public partial class Player : Kicker

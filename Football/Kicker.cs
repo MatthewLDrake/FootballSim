@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Football
 {
-    interface Kicker
+    public interface Kicker
     {
         void SetUpKicker(int[] ratings);
         double GetLegPower();

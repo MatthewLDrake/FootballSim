@@ -53,7 +53,71 @@ namespace Football
                 retVal += num;
             return retVal;
         }
-        private void PlayGame()
+        public PassResult WideOpenCatch(int catchRating, int specCatchRating, PassType type)
+        {
+            double yards = Math.Abs(type.GetYards());
+            if (type.OnTarget())
+            {
+                double num = -0.005300 * catchRating * catchRating + 1.165 * catchRating + 35;
+                //double num = Math.pow(64.9746 * Math.E, 0.0042 * (100 - catchRating));
+                int randNum = Random.GetInstance().Next(100);
+                bool caught = num > randNum;
+                if (!caught)
+                    return PassResult.Incomplete;
+                if (num - randNum > 15)
+                    return PassResult.In_Stride;
+                else
+                    return PassResult.Slowed;
+            }
+            else if (yards < 1)
+            {
+                double rating = .75 * catchRating + .25 * specCatchRating;
+                double num = 0.001000 * rating * rating + 0.7500 * rating + 10.00;
+                int randNum = Random.GetInstance().Next(100);
+                bool caught = num > randNum;
+                if (!caught)
+                    return PassResult.Incomplete;
+                if (num - randNum > 25)
+                    return PassResult.Slowed;
+                else
+                    return PassResult.Dove;
+            }
+            else if (yards < 3)
+            {
+                double num = 0.0;
+                if (specCatchRating > 50)
+                    num = 0.008200 * specCatchRating * specCatchRating - 0.33 * specCatchRating + 1;
+                else
+                    num = 0.0008000 * specCatchRating * specCatchRating + 0.04000 * specCatchRating + 1.000;
+                int randNum = Random.GetInstance().Next(0, 100);
+                bool caught = num > randNum;
+                if (!caught)
+                    return PassResult.Incomplete;
+                else
+                    if (num - randNum > 25)
+                    return PassResult.Slowed;
+                else
+                    return PassResult.Dove;
+            }
+            return PassResult.Incomplete;
+        }
+        public BlockingResult PassBlock(int passBlocking, int defenderMove)
+        {
+            int rating = passBlocking - defenderMove;
+            return BlockingResult.Sack;
+        }
+        public BlockingResult RunBlock(int runBlocking, int defenderMove, int defenderBlockShed)
+        {
+            return BlockingResult.Sack;
+        }
+
+
+    
+    
+    
+
+
+    private void PlayGame()
         {
             while(quarterTime > 0)
                 DoDrive(false);
@@ -198,4 +262,30 @@ namespace Football
             quarterTime -= timeTaken;
         }
     }
+}
+public class PassType
+{
+    private bool onTarget;
+    private double yards;
+    public PassType(bool onTarget, double yards)
+    {
+        this.onTarget = onTarget;
+        this.yards = yards;
+    }
+    public bool OnTarget()
+    {
+        return onTarget;
+    }
+    public double GetYards()
+    {
+        return yards;
+    }
+}
+public enum PassResult
+{
+    Interception, Incomplete, In_Stride, Slowed, Dove
+}
+public enum BlockingResult
+{
+    Pancake, Blocker_Forward, Blocker_Average, Blocker_Backward, Blocker_Pancaked, Sack
 }
