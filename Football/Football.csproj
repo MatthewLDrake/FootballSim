@@ -53,6 +53,7 @@
     <Compile Include="DepthChart.cs" />
     <Compile Include="Division.cs" />
     <Compile Include="DraftClasses.cs" />
+    <Compile Include="Field.cs" />
     <Compile Include="FootballGame.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -65,6 +66,7 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Formation.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Kicker.cs" />
     <Compile Include="OffensiveInterfaces.cs" />
@@ -78,8 +80,15 @@
     <Compile Include="Random.cs" />
     <Compile Include="Record.cs" />
     <Compile Include="Schedule.cs" />
+    <Compile Include="StartingRoster.cs" />
     <Compile Include="Stats.cs" />
     <Compile Include="Team.cs" />
+    <Compile Include="TempForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TempForm.Designer.cs">
+      <DependentUpon>TempForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="FootballGame.resx">
       <DependentUpon>FootballGame.cs</DependentUpon>
     </EmbeddedResource>
@@ -96,6 +105,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="TempForm.resx">
+      <DependentUpon>TempForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

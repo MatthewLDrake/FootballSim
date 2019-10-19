@@ -13,6 +13,7 @@ namespace Football
         double GetBlockShedding();
         double GetPlayRecognition();
         double GetDefensiveReactions();
+        double GetHitPower();
     }
 
     public interface PassRush

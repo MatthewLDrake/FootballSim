@@ -16,7 +16,7 @@ namespace Football
         public static Player GeneratePlayer(String str)
         {
             String[] arr = str.Split('/');
-            return new Player(arr[1], GetRatings(arr[0], arr[5], arr[6]), int.Parse(arr[3]), int.Parse(arr[4]), int.Parse(arr[7]),(CollegeList) Enum.Parse(typeof (CollegeList), arr[2]));            
+            return new Player(arr[1], arr[0], GetRatings(arr[0], arr[5], arr[6]), int.Parse(arr[3]), int.Parse(arr[4]), int.Parse(arr[7]),(CollegeList) Enum.Parse(typeof (CollegeList), arr[2]), 0);            
         }
         private static int[] GetRatings(String position, String style, String talent)
         {
@@ -93,57 +93,57 @@ namespace Football
         }
         private static int[] HBRatings(String style, String talent)
         {
-            int[] arr = new int[35];
+            int[] arr = new int[36];
             return arr;
         }
         private static int[] FBRatings(String style, String talent)
         {
-            int[] arr = new int[35];
+            int[] arr = new int[36];
             return arr;
         }
         private static int[] WRRatings(String style, String talent)
         {
-            int[] arr = new int[35];
+            int[] arr = new int[36];
             return arr;
         }
         private static int[] TERatings(String style, String talent)
         {
-            int[] arr = new int[35];
+            int[] arr = new int[36];
             return arr;
         }
         private static int[] OLRatings(String style, String talent)
         {
-            int[] arr = new int[35];
+            int[] arr = new int[36];
             return arr;
         }
         private static int[] DERatings(String style, String talent)
         {
-            int[] arr = new int[35];
+            int[] arr = new int[36];
             return arr;
         }
         private static int[] DTRatings(String style, String talent)
         {
-            int[] arr = new int[35];
+            int[] arr = new int[36];
             return arr;
         }
         private static int[] OLBRatings(String style, String talent)
         {
-            int[] arr = new int[35];
+            int[] arr = new int[36];
             return arr;
         }
         private static int[] MLBRatings(String style, String talent)
         {
-            int[] arr = new int[35];
+            int[] arr = new int[36];
             return arr;
         }
         private static int[] CBRatings(String style, String talent)
         {
-            int[] arr = new int[35];
+            int[] arr = new int[36];
             return arr;
         }
         private static int[] SRatings(String style, String talent)
         {
-            int[] arr = new int[35];
+            int[] arr = new int[36];
             return arr;
         }
         private static int[] KickerRatings(String style, String talent, bool kicker)
@@ -165,7 +165,7 @@ namespace Football
         }
         private static int[] DealWithIronmanPlayer(String positions, String style, String talent)
         {
-            int[] arr = new int[35];
+            int[] arr = new int[36];
             return arr;
         }
         public static List<int> GetNonAthleticThrower()
@@ -242,7 +242,7 @@ namespace Football
             }
             List<int> ratings = new List<int>();
 
-            int[] arr = new int[35];
+            int[] arr = new int[36];
 
             return arr;        
         }
@@ -295,7 +295,7 @@ namespace Football
                         return CreateAccurateKicker("Awful", kicker);
 
             }
-            int[] arr = new int[35];
+            int[] arr = new int[36];
 
             return arr;
         }
@@ -348,7 +348,7 @@ namespace Football
                         return CreateBalancedKicker("Awful", kicker);
 
             }
-            int[] arr = new int[35];
+            int[] arr = new int[36];
 
             return arr;
         }
@@ -405,7 +405,7 @@ namespace Football
                         return CreateBalancedQB("Awful");
 
             }
-            int[] arr = new int[35];
+            int[] arr = new int[36];
 
             return arr;
         }
@@ -459,7 +459,7 @@ namespace Football
                         return CreatePocketQB("Awful");
 
             }
-            int[] arr = new int[35];
+            int[] arr = new int[36];
 
             return arr;
         }
@@ -513,7 +513,7 @@ namespace Football
                         return CreateScramblerQB("Awful");
 
             }
-            int[] arr = new int[35];
+            int[] arr = new int[36];
 
             return arr;
         }

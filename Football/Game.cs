@@ -14,7 +14,10 @@ namespace Football
         private int[] teamOneScore, teamTwoScore;
         private int quarterTime, quarter;
         private bool teamOnePossession, firstPos, playoffs;
-        public Game(Team teamOne, Team teamTwo, bool playoffs = false)
+        private BallLocation ball;
+        private TempForm form;
+        private int down, lineToGain;
+        public Game(Team teamOne, Team teamTwo, bool playoffs = false, TempForm form = null)
         {
             this.teamOne = teamOne;
             this.teamTwo = teamTwo;
@@ -28,6 +31,10 @@ namespace Football
             quarter = 1;
 
             teamOnePossession = firstPos = Random.GetInstance().GetBool();
+
+            
+
+            this.form = form;
 
             PlayGame();
         }
@@ -101,24 +108,77 @@ namespace Football
             }
             return PassResult.Incomplete;
         }
-        public BlockingResult PassBlock(int passBlocking, int defenderMove)
+        public static BlockingResult PassBlock(int passBlocking, int defenderMove, Blocker doubleTeam = null, Blocker chip = null)
         {
-            int rating = passBlocking - defenderMove;
-            return BlockingResult.Sack;
+            if(doubleTeam == null && chip == null)
+            {
+                double rating = ((passBlocking - defenderMove) * 3.0 + Random.GetInstance().Next(-100, 101))/4.0;
+                if (Math.Abs(rating) < 10)
+                    return BlockingResult.Blocker_Average;
+                else if (rating > 0 && rating < 25)
+                    return BlockingResult.Blocker_Forward;
+                else if (rating < 0 && rating > -25)
+                    return BlockingResult.Blocker_Backward;
+                else if (rating < 0)
+                    return BlockingResult.Blocker_Pancaked;
+                else
+                    return BlockingResult.Pancake;
+            }
+            // Chip help
+            else if(doubleTeam == null)
+            {
+                double chipRating = chip.GetPassBlocking();
+            }
+            // double team
+            else
+            {
+
+            }
+            
+            return BlockingResult.None;
         }
-        public BlockingResult RunBlock(int runBlocking, int defenderMove, int defenderBlockShed)
+        public static BlockingResult RunBlock(int runBlocking, int defenderMove, bool finesseMove, Blocker doubleTeam = null, Blocker chip = null)
         {
-            return BlockingResult.Sack;
+            if (doubleTeam == null && chip == null)
+            {
+                double rating = ((runBlocking - defenderMove) * 3.0 + Random.GetInstance().Next(-100, 101)) / 4.0;
+                if (Math.Abs(rating) < 10)
+                    return BlockingResult.Blocker_Average;
+                else if (rating > 0 && rating < 25)
+                    return BlockingResult.Blocker_Forward;
+                else if (rating < 0 && rating > -25)
+                    return BlockingResult.Blocker_Backward;
+                else if (rating < 0)
+                    return BlockingResult.Blocker_Pancaked;
+                else
+                    return BlockingResult.Pancake;
+            }
+            // Chip help
+            else if (doubleTeam == null)
+            {
+
+            }
+            // double team
+            else
+            {
+                Random r = Random.GetInstance();
+                double blocking = (doubleTeam.GetRunBlocking() + runBlocking)/1.75;
+                if (finesseMove)
+                    blocking -= defenderMove + (r.GetBool() ? defenderMove * .25 : 0);
+                else
+                    blocking -= defenderMove - (r.GetBool() ? defenderMove * .25 : 0);
+                Console.WriteLine(blocking);
+            }
+            return BlockingResult.None;
         }
+        
 
-
-    
-    
-    
-
-
-    private void PlayGame()
+        private void PlayGame()
         {
+            ball = new BallLocation(75, 80);
+            down = 1;
+            lineToGain = 105;
+
             while(quarterTime > 0)
                 DoDrive(false);
 
@@ -127,6 +187,10 @@ namespace Football
 
             while (quarterTime > 0)
                 DoDrive(true);
+
+            ball = new BallLocation(75, 80);
+            down = 1;
+            lineToGain = 105;
 
             quarterTime = 60 * 15;
             quarter++;
@@ -160,6 +224,72 @@ namespace Football
 
         }
         private void DoDrive(bool endIfTimeExpires)
+        {
+            Random r = Random.GetInstance();
+
+            OffensivePlay offensivePlay = ChoosePlay();
+            DefensivePlay defensivePlay = ChooseDefensivePlay(offensivePlay.GetFormation());
+
+            SetUpPlay(offensivePlay.GetFormation(), defensivePlay.GetFormation());
+
+            if(offensivePlay.GetType() != OffensivePlayType.PASS)
+            {
+                DoRun(offensivePlay, defensivePlay);
+            }
+            else
+            {
+                DoPass(offensivePlay, defensivePlay);
+            }
+        }
+
+        private void SetUpPlay(Formation offensiveFormation, Formation defensiveFormation)
+        {
+
+        }
+
+        private void DoRun(OffensivePlay offensivePlay, DefensivePlay defensivePlay)
+        {
+
+        }
+        private void DoPass(OffensivePlay offensivePlay, DefensivePlay defensivePlay)
+        {
+
+        }
+
+
+        private OffensivePlay ChoosePlay()
+        {
+            PlayBook book = PlayBook.GetInstance();
+            OffensiveFormation offense = book.iFormTwoWR;
+            switch(Random.GetInstance().Next(8))
+            {
+                case 0:
+                    return offense.GetPlay("Dive Right");
+                case 1:
+                    return offense.GetPlay("Slam Right");
+                case 2:
+                    return offense.GetPlay("Stretch Right");
+                case 3:
+                    return offense.GetPlay("Pitch Right");
+                case 4:
+                    return offense.GetPlay("Dive Left");
+                case 5:
+                    return offense.GetPlay("Slam Left");
+                case 6:
+                    return offense.GetPlay("Stretch Left");
+                case 7:
+                    return offense.GetPlay("Pitch Left");                
+            }
+            return null;
+            // TODO: Implement coach playcalling logic
+        }
+        private DefensivePlay ChooseDefensivePlay(Formation formation)
+        {
+            DefensiveFormation defense = PlayBook.GetInstance().fourThree;
+            return defense.GetPlay("Cover Three");
+            // TODO: Implement coach playcalling logic
+        }
+        /*private void DoDrive(bool endIfTimeExpires)
         {
             Random r = Random.GetInstance();
             int timeTaken = (int)Math.Round(r.GetGaussian(timeOfDrive, 30));
@@ -260,7 +390,7 @@ namespace Football
 
 
             quarterTime -= timeTaken;
-        }
+        }*/
     }
 }
 public class PassType
@@ -287,5 +417,5 @@ public enum PassResult
 }
 public enum BlockingResult
 {
-    Pancake, Blocker_Forward, Blocker_Average, Blocker_Backward, Blocker_Pancaked, Sack
+    Pancake, Blocker_Forward, Blocker_Average, Blocker_Backward, Blocker_Pancaked, None
 }

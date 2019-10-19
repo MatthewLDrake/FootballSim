@@ -43,50 +43,8 @@ namespace Football
             afcSouth = new Division("AFC South");
             afcWest = new Division("AFC West");
 
-            teams = new List<Team>
-            {
-                new Team("Green Bay Packers"),
-                new Team("Detroit Lions"),
-                new Team("Minnesota Vikings"),
-                new Team("Chicago Bears"),
+            teams = StartingRoster.GetTeams();
 
-                new Team("Dallas Cowboys"),
-                new Team("Washington Redskins"),
-                new Team("Philadelphia Eagles"),
-                new Team("New York Giants"),
-
-                new Team("New Orleans Saints"),
-                new Team("Tampa Bay Buccaneers"),
-                new Team("Carolina Panthers"),
-                new Team("Atlanta Falcons"),
-
-                new Team("Arizona Cardinals"),
-                new Team("Los Angeles Rams"),
-                new Team("Seattle Seahawks"),
-                new Team("San Francisco 49ers"),
-
-                new Team("Cleveland Browns"),
-                new Team("Cincinatti Bengals"),
-                new Team("Baltimore Ravens"),
-                new Team("Pittsburgh Steelers"),
-
-                new Team("New England Patriots"),
-                new Team("Miami Dolphins"),
-                new Team("New York Jets"),
-                new Team("Buffalo Bills"),
-
-                new Team("Houston Texans"),
-                new Team("Indianapolis Colts"),
-                new Team("Jacksonville Jaguars"),
-                new Team("Tennesee Titans"),
-
-                new Team("Los Angeles Chargers"),
-                new Team("Oakland Raiders"),
-                new Team("Denver Broncos"),
-                new Team("Kansas City Chiefs")                
-
-                
-            };
             for(int i = 0; i < teams.Count; i++)
             {
                 teams[i].SetTeamNum(i);
@@ -102,6 +60,11 @@ namespace Football
             afcWest.AddTeams(teams[28], teams[29], teams[30], teams[31]);
 
             stage = 0;
+        }
+        
+        public Team GetTeam(int teamNum)
+        {
+            return teams[teamNum];
         }
         private void PlaySeason()
         {

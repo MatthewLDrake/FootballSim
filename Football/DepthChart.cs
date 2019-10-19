@@ -5,10 +5,10 @@ using System.Text;
 
 namespace Football
 {
-    class DepthChart
+    public class DepthChart
     {
-        private Player[] quarterbacks, halfbacks, fullbacks, wideRecievers, tightEnds, leftTackles, leftGuards, centers, rightGuards, rightTackles, leftEnds, defensiveTackles, rightEnds, leftOutsideLinebackers, middleLinebackers, rightOutsideLinebackers, cornerBacks, strongSafeties, freeSafeties;
-        private Player punter, kicker;
+        public Player[] quarterbacks, halfbacks, fullbacks, wideRecievers, tightEnds, leftTackles, leftGuards, centers, rightGuards, rightTackles, leftEnds, defensiveTackles, rightEnds, leftOutsideLinebackers, middleLinebackers, rightOutsideLinebackers, cornerBacks, strongSafeties, freeSafeties;
+        public Player punter, kicker;
         public DepthChart()
         {
             quarterbacks = new Player[3];
@@ -31,5 +31,6 @@ namespace Football
             strongSafeties = new Player[3];
             freeSafeties = new Player[3];
         }
+        
     }
 }
