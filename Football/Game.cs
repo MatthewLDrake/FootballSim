@@ -227,33 +227,47 @@ namespace Football
         {
             Random r = Random.GetInstance();
 
-            OffensivePlay offensivePlay = ChoosePlay();
-            DefensivePlay defensivePlay = ChooseDefensivePlay(offensivePlay.GetFormation());
-
-            SetUpPlay(offensivePlay.GetFormation(), defensivePlay.GetFormation());
-
-            if(offensivePlay.GetType() != OffensivePlayType.PASS)
+            while(true)
             {
-                DoRun(offensivePlay, defensivePlay);
+                OffensivePlay offensivePlay = ChoosePlay();
+                DefensivePlay defensivePlay = ChooseDefensivePlay(offensivePlay.GetFormation());
+
+                PlayResult result = Field.GetInstance().RunPlay(ball, lineToGain, offensivePlay, defensivePlay);
+
+                if(result.turnover)
+                {
+                    teamOnePossession = !teamOnePossession;
+                    if (result.touchdown)
+                    {
+                        if (teamOnePossession)
+                        {
+                            teamOneScore[quarter - 1] += 6;
+                            DoExtraPoint;
+                        }
+                        else
+                        {
+                            teamTwoScore[quarter - 1] += 6;
+                            DoExtraPoint();
+                        }
+                    }
+                    return;
+                }
+                else if (result.touchdown)
+                {
+                    if (teamOnePossession)
+                    {
+                        teamOneScore[quarter - 1] += 6;
+                        DoExtraPoint;
+                    }
+                    else
+                    {
+                        teamTwoScore[quarter - 1] += 6;
+                        DoExtraPoint();
+                    }
+                }
             }
-            else
-            {
-                DoPass(offensivePlay, defensivePlay);
-            }
-        }
 
-        private void SetUpPlay(Formation offensiveFormation, Formation defensiveFormation)
-        {
-
-        }
-
-        private void DoRun(OffensivePlay offensivePlay, DefensivePlay defensivePlay)
-        {
-
-        }
-        private void DoPass(OffensivePlay offensivePlay, DefensivePlay defensivePlay)
-        {
-
+            
         }
 
 
