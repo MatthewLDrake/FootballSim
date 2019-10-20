@@ -15,8 +15,9 @@ namespace Football
         private List<List<StatsHolder>> seasonStats;
         private List<List<List<StatsHolder>>> careerStats;
         private Team team;
+        private String mainPos;
         // This is the base player
-        public Player(String name, int[] ratings, int height, int weight, int age, CollegeList college)
+        public Player(String name, String mainPos, int[] ratings, int height, int weight, int age, CollegeList college, int yearsPro)
         {
             this.name = name;
             speedRating = ratings[0];
@@ -29,6 +30,7 @@ namespace Football
             careerStats = new List<List<List<StatsHolder>>>();
 
             this.age = age;
+            this.mainPos = mainPos;
             this.college = college;
 
 
@@ -37,9 +39,13 @@ namespace Football
             SetUpRouteRunner(ratings.Skip(14).Take(5).ToArray());
             SetUpBallCarrier(ratings.Skip(19).Take(5).ToArray());
             SetUpBlocker(ratings.Skip(24).Take(2).ToArray());
-            SetDefenderRatings(ratings.Skip(26).Take(4).ToArray());
-            SetUpPassRusher(ratings.Skip(30).Take(2).ToArray());
-            SetUpCoverage(ratings.Skip(32).Take(3).ToArray());
+            SetDefenderRatings(ratings.Skip(26).Take(5).ToArray());
+            SetUpPassRusher(ratings.Skip(31).Take(2).ToArray());
+            SetUpCoverage(ratings.Skip(33).Take(3).ToArray());
+        }
+        public String GetMainPosition()
+        {
+            return mainPos;
         }
         public void SetTeam(Team team)
         {

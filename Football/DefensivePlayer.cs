@@ -8,13 +8,18 @@ namespace Football
 {
     public partial class Player : BaseDefender
     {
-        private int blockShedding, defensiveReactions, playRecognition, tackling;
+        private int blockShedding, defensiveReactions, playRecognition, tackling, hitPower;
         public void SetDefenderRatings(int[] ratings)
         {
             blockShedding = ratings[0];
             defensiveReactions = ratings[1];
             playRecognition = ratings[2];
             tackling = ratings[3];
+            hitPower = ratings[4];
+        }
+        public double GetHitPower()
+        {
+            return hitPower;
         }
         public double GetBlockShedding()
         {

@@ -33,13 +33,15 @@ namespace Football
             List<Stats> retVal = new List<Stats>();
             foreach(StatsHolder stat in stats )
             {
-                if(stat.GetStat() is Rush rush)
+                if(stat.GetStat() is Rush)
                 {
+                    Rush rush = stat.GetStat() as Rush;
                     if (p.Equals(rush.tackler))
                         retVal.Add(rush);
                 }
-                else if(stat.GetStat() is Reception reception)
+                else if(stat.GetStat() is Reception)
                 {
+                    Reception reception = stat.GetStat() as Reception;
                     if (p.Equals(reception.tackler))
                         retVal.Add(reception);
                 }
@@ -79,8 +81,9 @@ namespace Football
 
            foreach(Stats item in list)
             {
-                if (item is Punts punt)
+                if (item is Punts)
                 {
+                    Punts punt = item as Punts;
                     fairCatches += punt.fairCaught;
                     insideTwenties += punt.insideTwenty;
                     touchDowns += punt.touchDown;
@@ -135,8 +138,9 @@ namespace Football
             double yardsInAir = 0.0, yardsAfterCatch = 0.0;
             foreach (Stats value in list)
             {
-                if (value is Reception item)
+                if (value is Reception)
                 {
+                    Reception item = value as Reception;
                     completions += item.completions;
                     attempts += item.attempts;
                     interceptions += item.interceptions;
@@ -180,8 +184,9 @@ namespace Football
 
             foreach(Stats stat in list)
             {
-                if(stat is Rush item)
+                if(stat is Rush)
                 {
+                    Rush item = stat as Rush;
                     yards += item.yards;
                     yardsAfterContact += item.yardsAfterContact;
                     attempts += item.attempts;
