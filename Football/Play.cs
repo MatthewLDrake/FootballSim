@@ -10,6 +10,10 @@ namespace Football
         private Formation formation;
         public Play(Formation formation)
         {
+            SetFormation(formation);   
+        }
+        public void SetFormation(Formation formation)
+        {
             this.formation = formation;
         }
         public Formation GetFormation()
@@ -39,9 +43,13 @@ namespace Football
             this.routes = routes;
             this.formation = formation;
         }
-        public OffensivePlayType GetType()
+        public OffensivePlayType GetPlayType()
         {
             return type;
+        }
+        public RouteTypes GetRoute(int routeNum)
+        {
+            return new RouteTypes(routes[routeNum]);
         }
         
     }
@@ -52,7 +60,7 @@ namespace Football
         {
             this.type = type;
         }
-        public DefensivePlayType GetType()
+        public DefensivePlayType GetPlayType()
         {
             return type;
         }

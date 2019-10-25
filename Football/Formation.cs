@@ -5,6 +5,12 @@ using System.Text;
 
 namespace Football
 {
+    enum Constants
+    {// 0 = WR, 1 = HB, 2 = FB, 3 = TE
+        TE = 3, HB = 1, WR = 0, FB = 2,
+        // 0 = MLB, 1 = LOLB, 2 = ROLB, 3 = DT, 4 = RE, 5 = LE, 6 = CB, 7 = SS. 8 = FS
+        MLB = 0, LOLB = 1, ROLB = 2, DT = 3, RE = 4, LE = 5, CB = 6, SS = 7, FS = 8
+    }
     public interface Formation
     {        
         Player[] GetPlayers(DepthChart chart);
@@ -23,11 +29,59 @@ namespace Football
         {
 
             iFormTwoWR = new OffensiveFormation(new EligibleRecieverLayout[]{
-            new EligibleRecieverLayout(0, true, EligibleLocation.OFF_LINE), 
-            new EligibleRecieverLayout(0, false, EligibleLocation.ON_LINE), 
-            new EligibleRecieverLayout(1, false, EligibleLocation.BACKFIELD), 
-            new EligibleRecieverLayout(2, false, EligibleLocation.BACKFIELD), 
-            new EligibleRecieverLayout(3, true, EligibleLocation.ON_LINE) }, new Dictionary<String, OffensivePlay>());
+            new EligibleRecieverLayout((int)Constants.WR, true, EligibleLocation.OFF_LINE), 
+            new EligibleRecieverLayout((int)Constants.WR, false, EligibleLocation.ON_LINE), 
+            new EligibleRecieverLayout((int)Constants.HB, false, EligibleLocation.CENTER_BACKFIELD), 
+            new EligibleRecieverLayout((int)Constants.FB, false, EligibleLocation.CENTER_BACKFIELD), 
+            new EligibleRecieverLayout((int)Constants.TE, true, EligibleLocation.ON_LINE) }, PassPlays.GetIFormTwoWRPassPlays());
+
+            iFormTwoTE = new OffensiveFormation(new EligibleRecieverLayout[]{
+                 new EligibleRecieverLayout((int)Constants.WR, true, EligibleLocation.OFF_LINE),             
+            new EligibleRecieverLayout((int)Constants.HB, false, EligibleLocation.CENTER_BACKFIELD), 
+            new EligibleRecieverLayout((int)Constants.FB, false, EligibleLocation.CENTER_BACKFIELD), 
+            new EligibleRecieverLayout((int)Constants.TE, false, EligibleLocation.ON_LINE), 
+            new EligibleRecieverLayout((int)Constants.TE, true, EligibleLocation.ON_LINE) }, new Dictionary<String, OffensivePlay>()
+            );
+
+            iFormTwinTE = new OffensiveFormation(new EligibleRecieverLayout[]{
+                 new EligibleRecieverLayout((int)Constants.WR, true, EligibleLocation.ON_LINE),             
+            new EligibleRecieverLayout((int)Constants.HB, false, EligibleLocation.CENTER_BACKFIELD), 
+            new EligibleRecieverLayout((int)Constants.FB, false, EligibleLocation.CENTER_BACKFIELD), 
+            new EligibleRecieverLayout((int)Constants.TE, false, EligibleLocation.ON_LINE), 
+            new EligibleRecieverLayout((int)Constants.TE, false, EligibleLocation.OFF_LINE) }, new Dictionary<String, OffensivePlay>()
+            );
+
+            singleBackFourWR = new OffensiveFormation(new EligibleRecieverLayout[]{                             
+            new EligibleRecieverLayout((int)Constants.HB, false, EligibleLocation.CENTER_BACKFIELD), 
+            new EligibleRecieverLayout((int)Constants.WR, true, EligibleLocation.ON_LINE), 
+            new EligibleRecieverLayout((int)Constants.WR, true, EligibleLocation.OFF_LINE), 
+            new EligibleRecieverLayout((int)Constants.WR, false, EligibleLocation.OFF_LINE), 
+            new EligibleRecieverLayout((int)Constants.WR, false, EligibleLocation.ON_LINE) }, new Dictionary<String, OffensivePlay>()
+            );
+
+            singleBackBunch = new OffensiveFormation(new EligibleRecieverLayout[]{                             
+            new EligibleRecieverLayout((int)Constants.HB, false, EligibleLocation.CENTER_BACKFIELD), 
+            new EligibleRecieverLayout((int)Constants.WR, true, EligibleLocation.OFF_LINE), 
+            new EligibleRecieverLayout((int)Constants.WR, true, EligibleLocation.ON_LINE), 
+            new EligibleRecieverLayout((int)Constants.WR, true, EligibleLocation.OFF_LINE, (int)Constants.TE), 
+            new EligibleRecieverLayout((int)Constants.WR, false, EligibleLocation.ON_LINE) }, new Dictionary<String, OffensivePlay>()
+            );
+
+            singleBackTwoTE = new OffensiveFormation(new EligibleRecieverLayout[]{                             
+            new EligibleRecieverLayout((int)Constants.HB, false, EligibleLocation.CENTER_BACKFIELD), 
+            new EligibleRecieverLayout((int)Constants.TE, true, EligibleLocation.ON_LINE), 
+            new EligibleRecieverLayout((int)Constants.WR, true, EligibleLocation.OFF_LINE), 
+            new EligibleRecieverLayout((int)Constants.WR, false, EligibleLocation.OFF_LINE), 
+            new EligibleRecieverLayout((int)Constants.TE, false, EligibleLocation.ON_LINE) }, new Dictionary<String, OffensivePlay>()
+            );
+
+            singleBackTwinTE = new OffensiveFormation(new EligibleRecieverLayout[]{                             
+            new EligibleRecieverLayout((int)Constants.HB, false, EligibleLocation.CENTER_BACKFIELD), 
+            new EligibleRecieverLayout((int)Constants.TE, true, EligibleLocation.ON_LINE), 
+            new EligibleRecieverLayout((int)Constants.TE, true, EligibleLocation.OFF_LINE), 
+            new EligibleRecieverLayout((int)Constants.WR, false, EligibleLocation.OFF_LINE), 
+            new EligibleRecieverLayout((int)Constants.WR, false, EligibleLocation.ON_LINE) }, new Dictionary<String, OffensivePlay>()
+            );
 
             fourThree = new DefensiveFormation(2, 2, 3, 2, 2);
             fourFour = new DefensiveFormation(2, 1, 4, 2, 2);
@@ -54,7 +108,7 @@ namespace Football
     {
         private Dictionary<String, DefensivePlay> plays;
         private DefensivePlayerLayout[] players;
-        private int corners, safties, linebackers, ends, tackles;
+        public readonly int corners, safties, linebackers, ends, tackles;
         public DefensiveFormation(int corners, int safties, int linebackers, int ends, int tackles)
         {
             plays = new Dictionary<string, DefensivePlay>();
@@ -69,60 +123,60 @@ namespace Football
             // 0 = MLB, 1 = LOLB, 2 = ROLB, 3 = DT, 4 = RE, 5 = LE, 6 = CB, 7 = SS. 8 = FS
             for (int i = 0; i < corners; i++ )
             {
-                players[i] = new DefensivePlayerLayout(6);
+                players[i] = new DefensivePlayerLayout((int)Constants.CB);
             }
             for (int i = 0; i < safties; i++)
             {
-                players[loc] = new DefensivePlayerLayout(i % 2 == 0 ? 7 : 8);
+                players[loc] = new DefensivePlayerLayout(i % 2 == 0 ? (int)Constants.SS : (int)Constants.FS);
                 loc++;
             }
             if(linebackers > 2)
             {
                 for (int i = 2; i < linebackers; i++)
                 {
-                    players[loc] = new DefensivePlayerLayout(0);
+                    players[loc] = new DefensivePlayerLayout((int)Constants.MLB);
                     loc++;
                 }
-                players[loc] = new DefensivePlayerLayout(1);
+                players[loc] = new DefensivePlayerLayout((int)Constants.LOLB);
                 loc++;
-                players[loc] = new DefensivePlayerLayout(2);
+                players[loc] = new DefensivePlayerLayout((int)Constants.ROLB);
                 loc++;
                 
             }
             else if(linebackers == 2)
             {
-                players[loc] = new DefensivePlayerLayout(0);
+                players[loc] = new DefensivePlayerLayout((int)Constants.MLB);
                 loc++;
-                players[loc] = new DefensivePlayerLayout(1);
+                players[loc] = new DefensivePlayerLayout((int)Constants.LOLB);
                 loc++;
             }
             else if(linebackers == 1)
             {
-                players[loc] = new DefensivePlayerLayout(0);
+                players[loc] = new DefensivePlayerLayout((int)Constants.MLB);
                 loc++;
             }
 
             if(ends == 1)
             {
-                players[loc] = new DefensivePlayerLayout(4);
+                players[loc] = new DefensivePlayerLayout((int)Constants.RE);
                 loc++;
             }
             else if(ends == 2)
             {
-                players[loc] = new DefensivePlayerLayout(4);
+                players[loc] = new DefensivePlayerLayout((int)Constants.RE);
                 loc++;
-                players[loc] = new DefensivePlayerLayout(5);
+                players[loc] = new DefensivePlayerLayout((int)Constants.LE);
                 loc++;
             }
 
             for (int i = 0; i < tackles; i++ )
             {
-                players[loc] = new DefensivePlayerLayout(3);
+                players[loc] = new DefensivePlayerLayout((int)Constants.DT);
                 loc++;
             }
-            
 
-            plays.Add("Cover Three", new DefensivePlay(DefensivePlayType.COVER_THREE, this));
+
+            plays.Add("Man Two Under", new DefensivePlay(DefensivePlayType.MAN_TWO_UNDER, this));
         }
         public DefensivePlay GetPlay(String name)
         {
@@ -132,39 +186,50 @@ namespace Football
         {
             Player[] retVal = new Player[11];
 
-            // TODO: Make it so that the coach can sub in/out players
-            // Also check to make sure no duplicates exist
-
-            retVal[0] = chart.quarterbacks[0];
-            retVal[1] = chart.leftTackles[0];
-            retVal[2] = chart.leftGuards[0];
-            retVal[3] = chart.centers[0];
-            retVal[4] = chart.rightGuards[0];
-            retVal[5] = chart.rightTackles[0];
-
-
-            int wrCount = 0, teCount = 0, hbCount = 0, fbCount = 0;
+            int mlbCount = 0, lolbCount = 0, rolbCount = 0, dtCount = 0, reCount = 0, leCount = 0, cbCount = 0, ssCount = 0, fsCount = 0;
             for (int i = 0; i < players.Length; i++)
             {
                 Player temp;
-
                 switch (players[i].GetPosition())
                 {
-                    case 0:
-                        temp = chart.wideRecievers[wrCount++];
+                    //MLB = 0, LOLB = 1, ROLB = 2, DT = 3, RE = 4, LE = 5, CB = 6, SS = 7, FS = 8
+                    case (int)Constants.MLB:
+                        temp = chart.middleLinebackers[mlbCount++];
                         break;
-                    case 1:
-                        temp = chart.wideRecievers[hbCount++];
+                    case (int)Constants.LOLB:
+                        temp = chart.leftOutsideLinebackers[lolbCount++];
                         break;
-                    case 2:
-                        temp = chart.wideRecievers[fbCount++];
+                    case (int)Constants.ROLB:
+                        temp = chart.rightOutsideLinebackers[rolbCount++];
+                        break;
+                    case (int)Constants.DT:
+                        temp = chart.defensiveTackles[dtCount++];
+                        break;
+                    case (int)Constants.RE:
+                        temp = chart.rightEnds[reCount++];
+                        break;
+                    case (int)Constants.LE:
+                        temp = chart.leftEnds[leCount++];
+                        break;
+                    case (int)Constants.CB:
+                        temp = chart.cornerBacks[cbCount++];
+                        break;
+                    case (int)Constants.SS:
+                        temp = chart.strongSafeties[ssCount++];
                         break;
                     default:
-                        temp = chart.tightEnds[teCount++];
+                        temp = chart.freeSafeties[fsCount++];
                         break;
                 }
-                retVal[6 + i] = temp;
+
+
+                retVal[i] = temp;
             }
+
+            // TODO: Make it so that the coach can sub in/out players
+            // Also check to make sure no duplicates exist
+
+
 
             return retVal;
         }
@@ -173,7 +238,8 @@ namespace Football
     {
         private Dictionary<String, OffensivePlay> plays;
         private EligibleRecieverLayout[] players;
-        public OffensiveFormation(EligibleRecieverLayout[] players, Dictionary<String, OffensivePlay> passPlays)
+        private bool shotGun;
+        public OffensiveFormation(EligibleRecieverLayout[] players, Dictionary<String, OffensivePlay> passPlays, bool shotGun = false)
         {
             plays = new Dictionary<String, OffensivePlay>();
             plays.Add("Dive Right", new OffensivePlay(OffensivePlayType.DIVE_RIGHT, this));
@@ -186,9 +252,14 @@ namespace Football
             plays.Add("Pitch Left", new OffensivePlay(OffensivePlayType.PITCH_LEFT, this));
 
             foreach (KeyValuePair<String, OffensivePlay> pair in passPlays)
+            {
                 plays.Add(pair.Key, pair.Value);
+                pair.Value.SetFormation(this);
+            }
 
             this.players = players;
+
+            this.shotGun = shotGun;
 
         }
         public Player[] GetPlayers(DepthChart chart)
@@ -211,16 +282,16 @@ namespace Football
             {
                 Player temp;
 
-                switch(players[i].GetPosition())
+                switch(players[i].GetActualPosition())
                 {
-                    case 0:
+                    case (int)Constants.WR:
                         temp = chart.wideRecievers[wrCount++];
                         break;
-                    case 1:
-                        temp = chart.wideRecievers[hbCount++];
+                    case (int)Constants.HB:
+                        temp = chart.halfbacks[hbCount++];
                         break;
-                    case 2:
-                        temp = chart.wideRecievers[fbCount++];
+                    case (int)Constants.FB:
+                        temp = chart.fullbacks[fbCount++];
                         break;
                     default:
                         temp = chart.tightEnds[teCount++];
@@ -231,6 +302,14 @@ namespace Football
 
             return retVal;
         }
+        public EligibleRecieverLayout[] GetLocations()
+        {
+            return players;
+        }
+        public bool GetShotGun()
+        {
+            return shotGun;
+        }
         public OffensivePlay GetPlay(String playName)
         {
             return plays[playName];
@@ -239,14 +318,22 @@ namespace Football
     public class EligibleRecieverLayout
     {
         // 0 = WR, 1 = HB, 2 = FB, 3 = TE
-        private int position;
+        private int position, actualPosition;
         private bool leftOfBall;
         private EligibleLocation location;
-        public EligibleRecieverLayout(int position, bool leftOfBall, EligibleLocation location)
+        public EligibleRecieverLayout(int position, bool leftOfBall, EligibleLocation location, int actualPosition = -1)
         {
             this.position = position;
             this.leftOfBall = leftOfBall;
             this.location = location;
+            if (actualPosition == -1)
+                this.actualPosition = position;
+            else
+                this.actualPosition = actualPosition;
+        }
+        public int GetActualPosition()
+        {
+            return actualPosition;
         }
         public int GetPosition()
         {
@@ -283,6 +370,6 @@ namespace Football
     }
     public enum EligibleLocation
     {
-        ON_LINE, BACKFIELD, OFF_LINE
+        ON_LINE, BACKFIELD, CENTER_BACKFIELD, OFF_LINE
     }
 }

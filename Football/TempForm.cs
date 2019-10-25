@@ -30,7 +30,9 @@ namespace Football
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Game game = new Game(Packers, Raiders, false, this);           
+            DefenseCreator d = new DefenseCreator();
+            d.Show();
+            //Game game = new Game(Packers, Raiders, false, this);           
 
             /*
             foreach (BlockingResult result in Enum.GetValues(typeof(BlockingResult)))

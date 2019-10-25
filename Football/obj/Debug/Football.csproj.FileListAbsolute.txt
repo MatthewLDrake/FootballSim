@@ -20,3 +20,4 @@ C:\Users\Matt\Documents\FootballSim\Football\obj\Debug\Football.Form1.resources
 C:\Users\Matt\Documents\FootballSim\Football\obj\Debug\Football.Properties.Resources.resources
 C:\Users\Matt\Documents\FootballSim\Football\obj\Debug\Football.csproj.GenerateResource.Cache
 C:\Users\Matt\Documents\FootballSim\Football\obj\Debug\Football.TempForm.resources
+C:\Users\Matt\Documents\FootballSim\Football\obj\Debug\Football.DefenseCreator.resources

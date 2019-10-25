@@ -48,6 +48,12 @@
   <ItemGroup>
     <Compile Include="Coach.cs" />
     <Compile Include="CollegeList.cs" />
+    <Compile Include="DefenseCreator.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DefenseCreator.Designer.cs">
+      <DependentUpon>DefenseCreator.cs</DependentUpon>
+    </Compile>
     <Compile Include="DefensiveInterfaces.cs" />
     <Compile Include="DefensivePlayer.cs" />
     <Compile Include="DepthChart.cs" />
@@ -71,6 +77,7 @@
     <Compile Include="Kicker.cs" />
     <Compile Include="OffensiveInterfaces.cs" />
     <Compile Include="OffensivePlayer.cs" />
+    <Compile Include="PassPlays.cs" />
     <Compile Include="Play.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="PlayerFactory.cs" />
@@ -89,6 +96,10 @@
     <Compile Include="TempForm.Designer.cs">
       <DependentUpon>TempForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Tuple.cs" />
+    <EmbeddedResource Include="DefenseCreator.resx">
+      <DependentUpon>DefenseCreator.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FootballGame.resx">
       <DependentUpon>FootballGame.cs</DependentUpon>
     </EmbeddedResource>

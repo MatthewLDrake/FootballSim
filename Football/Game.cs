@@ -32,7 +32,7 @@ namespace Football
 
             teamOnePossession = firstPos = Random.GetInstance().GetBool();
 
-            
+            Field.GetInstance().SetTeams(teamOne, teamTwo);
 
             this.form = form;
 
@@ -232,7 +232,13 @@ namespace Football
                 OffensivePlay offensivePlay = ChoosePlay();
                 DefensivePlay defensivePlay = ChooseDefensivePlay(offensivePlay.GetFormation());
 
-                PlayResult result = Field.GetInstance().RunPlay(ball, lineToGain, offensivePlay, defensivePlay);
+                PlayResult result = Field.GetInstance().RunPlay(ball, lineToGain, offensivePlay, defensivePlay, teamOnePossession);
+
+                if(result == null)
+                {
+                    quarterTime -= 100000;
+                    return;
+                }
 
                 if(result.turnover)
                 {
@@ -242,7 +248,7 @@ namespace Football
                         if (teamOnePossession)
                         {
                             teamOneScore[quarter - 1] += 6;
-                            DoExtraPoint;
+                            DoExtraPoint();
                         }
                         else
                         {
@@ -257,7 +263,7 @@ namespace Football
                     if (teamOnePossession)
                     {
                         teamOneScore[quarter - 1] += 6;
-                        DoExtraPoint;
+                        DoExtraPoint();
                     }
                     else
                     {
@@ -269,13 +275,17 @@ namespace Football
 
             
         }
+        private void DoExtraPoint()
+        {
 
+        }
 
         private OffensivePlay ChoosePlay()
         {
             PlayBook book = PlayBook.GetInstance();
             OffensiveFormation offense = book.iFormTwoWR;
-            switch(Random.GetInstance().Next(8))
+            return offense.GetPlay("Deep Pass");
+            /*switch(Random.GetInstance().Next(8))
             {
                 case 0:
                     return offense.GetPlay("Dive Right");
@@ -294,13 +304,13 @@ namespace Football
                 case 7:
                     return offense.GetPlay("Pitch Left");                
             }
-            return null;
+            return null;*/
             // TODO: Implement coach playcalling logic
         }
         private DefensivePlay ChooseDefensivePlay(Formation formation)
         {
             DefensiveFormation defense = PlayBook.GetInstance().fourThree;
-            return defense.GetPlay("Cover Three");
+            return defense.GetPlay("Man Two Under");
             // TODO: Implement coach playcalling logic
         }
         /*private void DoDrive(bool endIfTimeExpires)

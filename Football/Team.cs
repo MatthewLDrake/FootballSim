@@ -34,82 +34,103 @@ namespace Football
         public void AddPlayer(Player p)
         {
             players.Add(p);
+            int i;
             switch(p.GetMainPosition())
             { 
                 case "QB":
-                    for (int i = 0; i < depthChart.quarterbacks.Length && depthChart.quarterbacks[i] != null; i++)
+
+                    for (i = 0; i < depthChart.quarterbacks.Length && depthChart.quarterbacks[i] != null; i++);                        
+                    if(i < depthChart.quarterbacks.Length)
                         depthChart.quarterbacks[i] = p;
                     break;
                 case "HB":
-                    for (int i = 0; i < depthChart.halfbacks.Length && depthChart.halfbacks[i] != null; i++)
+                    for (i = 0; i < depthChart.halfbacks.Length && depthChart.halfbacks[i] != null; i++) ;
+                    if (i < depthChart.halfbacks.Length)
                         depthChart.halfbacks[i] = p;
                     break;
                 case "FB":
-                    for (int i = 0; i < depthChart.fullbacks.Length && depthChart.fullbacks[i] != null; i++)
+                    for (i = 0; i < depthChart.fullbacks.Length && depthChart.fullbacks[i] != null; i++) ;
+                    if (i < depthChart.fullbacks.Length)
                         depthChart.fullbacks[i] = p;
                     break;
                 case "TE":
-                    for (int i = 0; i < depthChart.tightEnds.Length && depthChart.tightEnds[i] != null; i++)
+                    for (i = 0; i < depthChart.tightEnds.Length && depthChart.tightEnds[i] != null; i++) ;
+                    if (i < depthChart.tightEnds.Length)
                         depthChart.tightEnds[i] = p;
                     break;
                 case "WR":
-                    for (int i = 0; i < depthChart.wideRecievers.Length && depthChart.wideRecievers[i] != null; i++)
+                    for (i = 0; i < depthChart.wideRecievers.Length && depthChart.wideRecievers[i] != null; i++) ;
+                    if (i < depthChart.wideRecievers.Length)
                         depthChart.wideRecievers[i] = p;
                     break;
                 case "LT":
-                    for (int i = 0; i < depthChart.leftTackles.Length && depthChart.leftTackles[i] != null; i++)
+                    for (i = 0; i < depthChart.leftTackles.Length && depthChart.leftTackles[i] != null; i++) ;
+                    if (i < depthChart.leftTackles.Length)
                         depthChart.leftTackles[i] = p;
                     break;
                 case "LG":
-                    for (int i = 0; i < depthChart.leftGuards.Length && depthChart.leftGuards[i] != null; i++)
+                    for (i = 0; i < depthChart.leftGuards.Length && depthChart.leftGuards[i] != null; i++) ;
+                    if (i < depthChart.leftGuards.Length)
                         depthChart.leftGuards[i] = p;
                     break;
                 case "C":
-                    for (int i = 0; i < depthChart.centers.Length && depthChart.centers[i] != null; i++)
+                    for (i = 0; i < depthChart.centers.Length && depthChart.centers[i] != null; i++) ;
+                    if (i < depthChart.centers.Length)
                         depthChart.centers[i] = p;
                     break;
                 case "RG":
-                    for (int i = 0; i < depthChart.rightGuards.Length && depthChart.rightGuards[i] != null; i++)
+                    for (i = 0; i < depthChart.rightGuards.Length && depthChart.rightGuards[i] != null; i++) ;
+                    if (i < depthChart.rightGuards.Length)
                         depthChart.rightGuards[i] = p;
                     break;
                 case "RT":
-                    for (int i = 0; i < depthChart.rightTackles.Length && depthChart.rightTackles[i] != null; i++)
+                    for (i = 0; i < depthChart.rightTackles.Length && depthChart.rightTackles[i] != null; i++) ;
+                    if (i < depthChart.rightTackles.Length)
                         depthChart.rightTackles[i] = p;
                     break;
                 case "RE":
-                    for (int i = 0; i < depthChart.rightEnds.Length && depthChart.rightEnds[i] != null; i++)
+                    for (i = 0; i < depthChart.rightEnds.Length && depthChart.rightEnds[i] != null; i++) ;
+                    if (i < depthChart.rightEnds.Length)
                         depthChart.rightEnds[i] = p;
                     break;
                 case "LE":
-                    for (int i = 0; i < depthChart.leftEnds.Length && depthChart.leftEnds[i] != null; i++)
+                    for (i = 0; i < depthChart.leftEnds.Length && depthChart.leftEnds[i] != null; i++) ;
+                    if (i < depthChart.leftEnds.Length)
                         depthChart.leftEnds[i] = p;
                     break;
                 case "DT":
-                    for (int i = 0; i < depthChart.defensiveTackles.Length && depthChart.defensiveTackles[i] != null; i++)
+                    for (i = 0; i < depthChart.defensiveTackles.Length && depthChart.defensiveTackles[i] != null; i++) ;
+                    if (i < depthChart.defensiveTackles.Length)
                         depthChart.defensiveTackles[i] = p;
                     break;
                 case "LOLB":
-                    for (int i = 0; i < depthChart.leftOutsideLinebackers.Length && depthChart.leftOutsideLinebackers[i] != null; i++)
+                    for (i = 0; i < depthChart.leftOutsideLinebackers.Length && depthChart.leftOutsideLinebackers[i] != null; i++) ;
+                    if (i < depthChart.leftOutsideLinebackers.Length)
                         depthChart.leftOutsideLinebackers[i] = p;
                     break;
                 case "MLB":
-                    for (int i = 0; i < depthChart.middleLinebackers.Length && depthChart.middleLinebackers[i] != null; i++)
+                    for (i = 0; i < depthChart.middleLinebackers.Length && depthChart.middleLinebackers[i] != null; i++) ;
+                    if (i < depthChart.middleLinebackers.Length)
                         depthChart.middleLinebackers[i] = p;
                     break;
                 case "ROLB":
-                    for (int i = 0; i < depthChart.rightOutsideLinebackers.Length && depthChart.rightOutsideLinebackers[i] != null; i++)
+                    for (i = 0; i < depthChart.rightOutsideLinebackers.Length && depthChart.rightOutsideLinebackers[i] != null; i++) ;
+                    if (i < depthChart.rightOutsideLinebackers.Length)
                         depthChart.rightOutsideLinebackers[i] = p;
                     break;
                 case "CB":
-                    for (int i = 0; i < depthChart.cornerBacks.Length && depthChart.cornerBacks[i] != null; i++)
+                    for (i = 0; i < depthChart.cornerBacks.Length && depthChart.cornerBacks[i] != null; i++) ;
+                    if (i < depthChart.cornerBacks.Length)
                         depthChart.cornerBacks[i] = p;
                     break;
                 case "FS":
-                    for (int i = 0; i < depthChart.freeSafeties.Length && depthChart.freeSafeties[i] != null; i++)
+                    for (i = 0; i < depthChart.freeSafeties.Length && depthChart.freeSafeties[i] != null; i++) ;
+                    if (i < depthChart.freeSafeties.Length)
                         depthChart.freeSafeties[i] = p;
                     break;
                 case "SS":
-                    for (int i = 0; i < depthChart.strongSafeties.Length && depthChart.strongSafeties[i] != null; i++)
+                    for (i = 0; i < depthChart.strongSafeties.Length && depthChart.strongSafeties[i] != null; i++) ;
+                    if (i < depthChart.strongSafeties.Length)
                         depthChart.strongSafeties[i] = p;
                     break;
                 case "K":
