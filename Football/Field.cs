@@ -222,12 +222,20 @@ namespace Football
                 {
                     routes[i] = RunRoute(offensivePlayers[i + 6], first ? offense.GetRoute(i) : routes[i]);
                 }
+                first = false;
             }
             return null;
         }
 
         private RouteTypes RunRoute(Player player, RouteTypes routeTypes)
         {
+            double time = 0;
+            while(time < .1)
+            {
+                List<Tuple<Direction, int, bool>> routePart = routeTypes.GetTuple();
+            }
+
+            
             throw new NotImplementedException();
         }
     }

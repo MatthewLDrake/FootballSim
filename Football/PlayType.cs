@@ -57,7 +57,7 @@ namespace Football
     public class RouteTypes
     {
         private List<Tuple<Direction, int, bool>> route;
-        private int location;
+        private int location, currDirectionX, currDirectionY, currSpeed;
         public RouteTypes(List<Tuple<Direction, int, bool>> route)
         {
             // Make a copy
@@ -67,6 +67,29 @@ namespace Football
         {
             this.route = new List<Tuple<Direction,int,bool>>(copy.route);
             location = 0;
+            currDirectionX = 0;
+            currDirectionY = 0;
+            currSpeed = 0;
+        }
+        public int Location
+        {
+            get { return location; }
+            set { this.location = value;  }
+        }
+        public int CurrDirectionX
+        {
+            get { return currDirectionX; }
+            set { this.currDirectionX = value; }
+        }
+        public int CurrDirectionY
+        {
+            get { return currDirectionY; }
+            set { this.currDirectionY = value; }
+        }
+        public int CurrSpeed
+        {
+            get { return currSpeed; }
+            set { this.currSpeed = value; }
         }
         public List<Tuple<Direction, int, bool>> GetTuple()
         {
