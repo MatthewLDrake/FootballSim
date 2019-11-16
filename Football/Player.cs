@@ -43,6 +43,14 @@ namespace Football
             SetUpPassRusher(ratings.Skip(31).Take(2).ToArray());
             SetUpCoverage(ratings.Skip(33).Take(3).ToArray());
         }
+        public double GetSpeed()
+        {
+            return speedRating;
+        }
+        public double GetAcceleration()
+        {
+            return accelerationRating;
+        }
         public String GetMainPosition()
         {
             return mainPos;

@@ -47,9 +47,9 @@ namespace Football
         {
             return type;
         }
-        public RouteTypes GetRoute(int routeNum)
+        public RouteTypes GetRoute(int routeNum, int currLocationX, int currLocationY)
         {
-            return new RouteTypes(routes[routeNum]);
+            return new RouteTypes(routes[routeNum], currLocationX, currLocationY);
         }
         
     }

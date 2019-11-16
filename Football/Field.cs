@@ -220,23 +220,145 @@ namespace Football
             {
                 for (int i = 0; i < 5; i++)
                 {
-                    routes[i] = RunRoute(offensivePlayers[i + 6], first ? offense.GetRoute(i) : routes[i]);
+                    routes[i] = RunRoute(offensivePlayers[i + 6], first ? offense.GetRoute(i, offensivePlayerLocations[i+6].Item1, offensivePlayerLocations[i+6].Item2) : routes[i]);
                 }
                 first = false;
             }
             return null;
         }
-
-        private RouteTypes RunRoute(Player player, RouteTypes routeTypes)
+        public static int[][] TestRoute(Player player, RouteTypes type)
         {
-            double time = 0;
-            while(time < .1)
+            List<Tuple<int, int>> list = new List<Tuple<int, int>>();
+            int lastX = 10, lastY = 10;
+            list.Add(new Tuple<int, int>(lastX, lastY));
+            RouteTypes testRoute = new RouteTypes(type, lastX, lastY);
+            
+            while(!testRoute.Ended)
             {
-                List<Tuple<Direction, int, bool>> routePart = routeTypes.GetTuple();
+                testRoute = RunRoute(player, testRoute);
+                lastX += testRoute.ChangeInX;
+                lastY += testRoute.ChangeInY;
+                list.Add(new Tuple<int, int>(lastX, lastY));
             }
 
+            int[][] retVal = new int[list.Count][];
+            for(int i = 0; i < list.Count; i++)
+            {
+                retVal[i] = new int[] { list[i].Item1, list[i].Item2 };
+            }
+            return retVal;
+        }
+        private static RouteTypes RunRoute(Player player, RouteTypes routeTypes)
+        {
+            double time = 0;
+            routeTypes.ResetChanges();
+            double maxSpeed = GetMaxSpeed(player.GetSpeed());
+            double acceleration = GetAcceleration(player.GetAcceleration());
+            while(time < .5)
+            {
+                double currSpeed = routeTypes.CurrSpeed;
+                double distanceTravelled = 0;
+                if (maxSpeed == currSpeed)
+                {
+                    distanceTravelled = MetersToFeet(CalculateDistance(MPHtoMPS(currSpeed), .5 - time));
+                }
+                else
+                {
+                    
+                    distanceTravelled = MetersToFeet(CalculateDistance(MPHtoMPS(currSpeed), .5 - time, acceleration));
+                    currSpeed = MPStoMPH(CalculateFinalSpeed(MPHtoMPS(currSpeed), .5 - time, acceleration));
+                }
+                double distanceLeft = routeTypes.GetDistanceLeftOnCurrentBranch();
+
+                if (distanceLeft == -1)
+                {
+                    routeTypes.Ended = true;
+                    break;
+                }
+
+                if(distanceLeft > distanceTravelled)
+                {
+                    time = .5;
+                }
+                else
+                {
+                    routeTypes.ChangeDirection();
+                    double oldDistance = distanceTravelled;
+                    distanceTravelled = distanceLeft;
+                    if(maxSpeed == routeTypes.CurrSpeed)
+                    {
+                        time = CalculateTime(MPHtoMPS(maxSpeed), FeetToMeters(distanceTravelled));
+                    }
+                    else
+                    {
+                        double addedTime = CalculateTime(MPHtoMPS(routeTypes.CurrSpeed), FeetToMeters(distanceTravelled), acceleration);
+                        time += addedTime;
+                        currSpeed = MPStoMPH(CalculateFinalSpeed(MPHtoMPS(currSpeed), addedTime, acceleration));
+                    }
+                }
+                routeTypes.Location += distanceTravelled;
+                routeTypes.CurrSpeed = currSpeed;
+            }  
+
+            return routeTypes;
+        }
+
+        private static double CalculateTime(double speed, double distance)
+        {
+            return distance / speed;
+        }
+        private static double CalculateTime(double speed, double distance, double acceleration)
+        {
+            double answer = (-speed + Math.Sqrt(speed * speed + 2 * acceleration * distance)) / (acceleration);
+
+            if (answer > 0 && answer < .5)
+                return answer;
             
-            throw new NotImplementedException();
+            double answerTwo = (-speed - Math.Sqrt(speed * speed + 2 * acceleration * distance)) / (acceleration);
+
+            if (answerTwo > 0 && answerTwo < .5)
+                return answerTwo;
+
+            throw new Exception("Illegal Values Given");
+        }
+
+        // returns speed in mph
+        private static double GetMaxSpeed(double speedRating)
+        {
+            return 80 / (-0.00006314 * Math.Pow(speedRating,2) - 0.02369 * speedRating+7.000);
+        }
+        // returns speed in mph
+        private static double GetAcceleration(double accelerationRating)
+        {
+            return 1;
+        }
+        private static double CalculateDistance(double speed, double time)
+        {
+            return speed * time;
+        }
+        private static double CalculateDistance(double initialSpeed, double time, double acceleration)
+        {
+            return initialSpeed * time + .5 * acceleration * Math.Pow(time, 2);
+        }
+        private static double CalculateFinalSpeed(double initialSpeed, double time, double acceleration)
+        {
+            return initialSpeed + time * acceleration;
+        }
+        private static double MPHtoMPS(double mph)
+        {
+            return mph / 2.237;
+        }
+        private static double MPStoMPH(double mps)
+        {
+            return mps * 2.237;
+        }
+        private static double MetersToFeet(double meters)
+        {
+            return meters * 3.28084;
+        }
+        private static double FeetToMeters(double feet)
+        {
+            return feet / 3.28084;
         }
     }
     class FieldObject

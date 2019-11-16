@@ -57,36 +57,110 @@ namespace Football
     public class RouteTypes
     {
         private List<Tuple<Direction, int, bool>> route;
-        private int location, currDirectionX, currDirectionY, currSpeed;
+        private double location, currDirectionX, currDirectionY, currSpeed;
+        private int changeInX, changeInY, currLocationX, currLocationY, nextChange;
+        private bool ended;
         public RouteTypes(List<Tuple<Direction, int, bool>> route)
         {
             // Make a copy
             this.route = new List<Tuple<Direction, int, bool>>(route);
         }
-        public RouteTypes(RouteTypes copy)
+        public RouteTypes(RouteTypes copy, int currLocationX, int currLocationY)
         {
             this.route = new List<Tuple<Direction,int,bool>>(copy.route);
+            this.currLocationX = currLocationX;
+            this.currLocationY = currLocationY;
             location = 0;
             currDirectionX = 0;
             currDirectionY = 0;
             currSpeed = 0;
+            ended = false;
+            ChangeDirection(route[nextChange].Item1, route[nextChange].Item3);
+            nextChange = 1;
         }
-        public int Location
+        public void ChangeDirection()
+        {
+            if(nextChange > route.Count)
+                return;
+            ChangeDirection(route[nextChange].Item1, route[nextChange].Item3);
+        }
+        private void ChangeDirection(Direction direction, bool completeOveride)
+        {
+            if(completeOveride)
+            {
+                switch(direction)
+                {
+                    case Direction.BACK:
+                        currDirectionX = 0;
+                        currDirectionY = -1;
+                        break;
+                    case Direction.FORWARD:
+                        currDirectionX = 0;
+                        currDirectionY = 1;
+                        break;
+                    case Direction.FLAG:
+                        throw new NotImplementedException("Implement Flag");
+                        //break;
+                    case Direction.MIDDLE:
+                        currDirectionY = 0;
+                        currDirectionX = currLocationX > 80 ? -1 : 1;
+                        break;
+                    case Direction.SIDE_LINE:
+                        currDirectionY = 0;
+                        currDirectionX = currLocationX > 80 ? 1 : -1;
+                        break;
+                }
+            }
+            else
+                throw new NotImplementedException("Implement Non Complete Changes");
+        }
+        public void ResetChanges()
+        {
+            changeInX = 0;
+            changeInY = 0;
+        }
+        public bool Ended
+        {
+            get { return ended; }
+            set { this.ended = value; }
+        }
+        public int ChangeInX
+        {
+            get 
+            {
+                currLocationX += changeInX;
+                return changeInX; 
+            }
+        }
+        public int ChangeInY
+        {
+            get 
+            {
+                currLocationY += changeInY;
+                return changeInY; 
+            }
+        }
+        public double Location
         {
             get { return location; }
-            set { this.location = value;  }
+            set 
+            {
+                changeInX = (int)Math.Round(value * currDirectionX);
+                changeInY = (int)Math.Round(value * currDirectionY);
+                this.location = value; 
+            }
         }
-        public int CurrDirectionX
+        public double CurrDirectionX
         {
             get { return currDirectionX; }
             set { this.currDirectionX = value; }
         }
-        public int CurrDirectionY
+        public double CurrDirectionY
         {
             get { return currDirectionY; }
             set { this.currDirectionY = value; }
         }
-        public int CurrSpeed
+        public double CurrSpeed
         {
             get { return currSpeed; }
             set { this.currSpeed = value; }
@@ -104,8 +178,22 @@ namespace Football
                     retVal.Add(route[i]);
                     break;
                 }
+                currLoc += route[i].Item2;
             }
             return retVal;
+        }
+        public double GetDistanceLeftOnCurrentBranch()
+        {
+            int currLoc = 0;
+            for (int i = 0; i < route.Count; i++)
+            {
+                if (currLoc + route[i].Item2 > location)
+                {
+                    return currLoc + route[i].Item2 - location;
+                }
+                currLoc += route[i].Item2;
+            }
+            return -1;
         }
         static RouteTypes()
         {

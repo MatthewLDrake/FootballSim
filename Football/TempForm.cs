@@ -14,6 +14,7 @@ namespace Football
     {
         private Dictionary<BlockingResult, int> counter;
         private Team Packers, Raiders;
+        private int[][] locs;
         public TempForm()
         {
             InitializeComponent();
@@ -26,8 +27,20 @@ namespace Football
             Form1 form = new Form1();
             Packers = form.GetTeam(0);
             Raiders = form.GetTeam(29);
+            locs = Field.TestRoute(Packers.GetDepthChart().wideRecievers[0], RouteTypes.IN);
+            Refresh();
         }
-
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            base.OnPaint(e);
+            Pen pen = new Pen(Color.FromArgb(255, 255, 0, 0));
+            
+            for(int i = 0; i < locs.Length - 1; i++)
+            {
+                e.Graphics.DrawLine(pen, locs[i][0] * 10, locs[i][1] * 10, locs[i + 1][0] * 10, locs[i + 1][1] * 10);
+            }
+            pen.Dispose();
+        }
         private void button1_Click(object sender, EventArgs e)
         {
             DefenseCreator d = new DefenseCreator();
