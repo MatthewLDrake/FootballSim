@@ -248,25 +248,26 @@ namespace Football
             }
             return retVal;
         }
+        private const double TIME_VAL = .1; 
         private static RouteTypes RunRoute(Player player, RouteTypes routeTypes)
         {
             double time = 0;
             routeTypes.ResetChanges();
             double maxSpeed = GetMaxSpeed(player.GetSpeed());
             double acceleration = GetAcceleration(player.GetAcceleration());
-            while(time < .5)
+            while (time < TIME_VAL)
             {
                 double currSpeed = routeTypes.CurrSpeed;
                 double distanceTravelled = 0;
                 if (maxSpeed == currSpeed)
                 {
-                    distanceTravelled = MetersToFeet(CalculateDistance(MPHtoMPS(currSpeed), .5 - time));
+                    distanceTravelled = MetersToFeet(CalculateDistance(MPHtoMPS(currSpeed), TIME_VAL - time));
                 }
                 else
                 {
-                    
-                    distanceTravelled = MetersToFeet(CalculateDistance(MPHtoMPS(currSpeed), .5 - time, acceleration));
-                    currSpeed = MPStoMPH(CalculateFinalSpeed(MPHtoMPS(currSpeed), .5 - time, acceleration));
+
+                    distanceTravelled = MetersToFeet(CalculateDistance(MPHtoMPS(currSpeed), TIME_VAL - time, acceleration));
+                    currSpeed = MPStoMPH(CalculateFinalSpeed(MPHtoMPS(currSpeed), TIME_VAL - time, acceleration));
                 }
                 double distanceLeft = routeTypes.GetDistanceLeftOnCurrentBranch();
 
@@ -278,7 +279,7 @@ namespace Football
 
                 if(distanceLeft > distanceTravelled)
                 {
-                    time = .5;
+                    time = TIME_VAL;
                 }
                 else
                 {
